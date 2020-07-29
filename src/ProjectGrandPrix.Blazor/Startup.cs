@@ -10,6 +10,9 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using ProjectGrandPrix.Blazor.Data;
+using Microsoft.EntityFrameworkCore;
+using ProjectGrandPrix.DataAccess.Context;
+using Microsoft.EntityFrameworkCore.Sqlite;
 
 namespace ProjectGrandPrix.Blazor
 {
@@ -29,6 +32,8 @@ namespace ProjectGrandPrix.Blazor
             services.AddRazorPages();
             services.AddServerSideBlazor();
             services.AddSingleton<WeatherForecastService>();
+
+            services.AddDbContext<F1DbContext>(options => options.UseSqlite(Configuration["ConnectionStrings:ProjectGrandPrix"]));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
